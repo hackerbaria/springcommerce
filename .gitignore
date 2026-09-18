@@ -1,0 +1,13 @@
+# Local database and tracing runtime data (keep configuration and SQL scripts).
+/api-gateway/volume-data/
+/api-gateway/docker/tempo/tempo-data/
+/inventory-service/docker/mysql/data/
+/order-service/mysql/
+/product-service/data/
+
+# Runtime sockets cannot be indexed on Windows.
+*.sock
+*.sock.lock
+
+# Local IDE settings.
+/.idea/
