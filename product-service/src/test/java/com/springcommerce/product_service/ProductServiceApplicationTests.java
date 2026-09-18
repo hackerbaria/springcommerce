@@ -44,7 +44,12 @@ class ProductServiceApplicationTests {
 				{
 				    "name": "iPhone 15 Pro",
 				    "description": "Very Nice",
-				    "price": 999.09
+				    "price": 999.09,
+				    "brand": "Apple",
+				    "image": "iphone-15-pro.jpg",
+				    "maxQuantity": 10,
+				    "quantity": 3,
+				    "dateAdded": 1750000000000
 				}
 				""";
 		RestAssured.given()
@@ -57,7 +62,21 @@ class ProductServiceApplicationTests {
 				.body("id", Matchers.notNullValue())
 				.body("name", Matchers.equalTo("iPhone 15 Pro"))
 				.body("description", Matchers.equalTo("Very Nice"))
-				.body("price.toString()", is("999.09"));
+				.body("price.toString()", is("999.09"))
+				.body("brand", is("Apple"))
+				.body("image", is("iphone-15-pro.jpg"))
+				.body("maxQuantity", is(10))
+				.body("quantity", is(3))
+				.body("dateAdded", is(1750000000000L));
+
+		RestAssured.get("/api/product")
+				.then()
+				.statusCode(200)
+				.body("find { it.name == 'iPhone 15 Pro' }.brand", is("Apple"))
+				.body("find { it.name == 'iPhone 15 Pro' }.image", is("iphone-15-pro.jpg"))
+				.body("find { it.name == 'iPhone 15 Pro' }.maxQuantity", is(10))
+				.body("find { it.name == 'iPhone 15 Pro' }.quantity", is(3))
+				.body("find { it.name == 'iPhone 15 Pro' }.dateAdded", is(1750000000000L));
 	}
 
 }

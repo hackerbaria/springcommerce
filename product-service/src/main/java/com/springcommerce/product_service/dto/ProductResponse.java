@@ -2,5 +2,6 @@ package com.springcommerce.product_service.dto;
 
 import java.math.BigDecimal;
 
-public record ProductResponse(String id, String name, String description, BigDecimal price) {
+public record ProductResponse(String id, String name, String description, BigDecimal price,
+                              String brand, String image, Integer maxQuantity, Integer quantity, Long dateAdded) {
 }
